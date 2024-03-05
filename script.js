@@ -1,6 +1,9 @@
 const pokemonName = document.querySelector('.pokemon_name')
 const pokemonNumber = document.querySelector('.pokemon_number')
 const pokemonImage = document.querySelector('.pokemon_image')
+const pokemonHeight = document.querySelector('.pokemon_height')
+const pokemonWeight = document.querySelector('.pokemon_weight')
+const pokemonType = document.querySelector('.pokemon_type')
 
 const form = document.querySelector('.form')
 const input = document.querySelector('.input_search')
@@ -22,6 +25,9 @@ const renderPokemon = async (pokemon) => {
 
     pokemonName.innerHTML = 'Loading...'
     pokemonNumber.innerHTML = ''
+    pokemonType.innerHTML = ''
+    pokemonHeight.innerHTML = ''
+    pokemonWeight.innerHTML = ''
 
     const data = await fetchPokemon(pokemon)
 
@@ -29,6 +35,9 @@ const renderPokemon = async (pokemon) => {
         pokemonImage.style.display = 'block'
         pokemonName.innerHTML = data.name
         pokemonNumber.innerHTML = data.id
+        pokemonWeight.innerHTML = `Weight: ${data.weight}`
+        pokemonHeight.innerHTML = `Height: ${data.height}`
+        pokemonType.innerHTML = `Type: ${data.types.map(type => type.type.name).join(', ')}`
         pokemonImage.src = data['sprites']['versions']['generation-viii']['icons']['front_default']
         input.value = ''
         searchPokemon = data.id
